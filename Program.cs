@@ -75,7 +75,13 @@ public class Program
                 public string BankName { get; set; }
             }
         */
-        List<ReportItem> millionaireReport = ...
+        List<ReportItem> millionaireReport = (from customer in customers
+            join symbolKey in banks on customer.Bank equals symbolKey.Symbol into answer
+            from symbolKey in answer
+            select new ReportItem{
+                CustomerName = customer.Name,
+                BankName = symbolKey.Name
+            }).ToList();
 
         foreach (var item in millionaireReport)
         {
