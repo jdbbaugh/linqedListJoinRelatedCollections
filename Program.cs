@@ -76,6 +76,7 @@ public class Program
             }
         */
         List<ReportItem> millionaireReport = (from customer in customers
+            where customer.Balance >= 1000000
             join symbolKey in banks on customer.Bank equals symbolKey.Symbol into answer
             from symbolKey in answer
             select new ReportItem{
